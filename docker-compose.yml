@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  place:
+    image: place:latest
+
+#    build:
+#      context: ..
+#      dockerfile: ./env/Dockerfile
+    #restart: on-failure
+    env_file:
+      - .env
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    expose:
+      - 8000
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+
+  db:
+    container_name: db
+    image: postgis/postgis:latest
+#    restart: on-failure
+
+    env_file:
+      - .env
+    ports:
+      - 54321:5432

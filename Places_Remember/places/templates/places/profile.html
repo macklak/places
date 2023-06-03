@@ -1,0 +1,32 @@
+{% extends "places/base.html" %}
+{% load i18n %}
+{% load static %}
+<link type ="text/css" href="{% static 'places/css/style.css' %}" rel="stylesheet">
+{% block content %}
+{% if user.is_authenticated %}
+<aside>
+<div  class="user_info">
+    <img class="user_info-item" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+    <div class="user_info-item"><h1>{{ user.socialaccount_set.all.0.extra_data.first_name }}</h1></div>
+    <div class="user_info-item"><p>id  пользователя {{ user.socialaccount_set.all.0.uid }}</p></div>
+    <div class="user_info-item"><p> Дата регистрации {{ user.socialaccount_set.all.0.date_joined}}</p></div>
+    <div class="user_info-item"><p> Дата последнего входа {{ user.socialaccount_set.all.0.last_login}}</p></div>
+    <a href="{% url 'account_logout' %}"><button type="submit"
+                                                 class="btn btn-primary">{% trans "Выйти из аккаунта" %}</button></a>
+</div>
+</aside>
+<div id="content" >
+    <h1>Ваши воспоминания</h1>
+        <form action="/accounts/profile/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <!--<div class="form-row">
+                <input type="text" id="name" name="student_name"></div>
+            <div class="form-row">
+                <input type="text" id="comment" name="student_name"></div>-->
+
+            <button class="btn btn-primary" type="submit" value=Submit">добавить</button>
+        </form>
+</div>
+{% endif %}
+{% endblock %}
