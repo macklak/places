@@ -6,8 +6,12 @@ from django.contrib.gis.geos import Point
 
 class memories(models.Model):
     name = models.CharField(max_length=100)
-    comment =models.CharField()
+    comment =models.TextField()
     mapPlace=models.PointField(default=Point(0.0, 0.0))
     useruid=models.ForeignKey(SocialAccount ,on_delete=models.CASCADE)
+
+    # @property
+    # def picture_url(self):
+    #     return self.picture.url
 
 

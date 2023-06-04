@@ -5,6 +5,11 @@
     <title>{{Title}}</title>
     {% load static %}
 <link type ="text/css" href="{% static 'places/css/style.css' %}" rel="stylesheet">
+<link rel="shortcut icon" href="{% static '/Places/images/favicon.ico'%}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static 'places/css/map.css' %}">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 {% load django_bootstrap5 %}
 
 {% bootstrap_css %}

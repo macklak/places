@@ -5,10 +5,15 @@ from django.contrib.gis.geos import Point
 from .models import memories
 
 class MyGeoForm(forms.ModelForm):
-    name=forms.CharField(max_length=100)
-    comment=forms.CharField()
-    mapPlace= forms.PointField(widget=
-        forms.OSMWidget(attrs={'map_width': 800, 'map_height': 500}),initial=Point(0.0,0.0))
+    # name=forms.CharField(max_length=100)
+    # comment=forms.Textarea()
+    # mapPlace= forms.PointField(widget=
+    #     forms.OSMWidget(attrs={'map_width': 800, 'map_height': 500}),initial=Point(0.0,0.0))
+#    form.instance.user = self.request.user
     class Meta:
         model=memories
-        fields = ["name","comment","mapPlace"]
+        fields = ["name","comment",'mapPlace']
+        mapPlace=forms.PolygonField()
+        widgets = {
+            "mapPlace": forms.OSMWidget(attrs={'map_width': 800, 'map_height': 500}),
+        }

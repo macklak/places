@@ -1,6 +1,7 @@
 {% extends "places/base.html" %}
 {% load i18n %}
 {% load static %}
+{% load places_map %}
 <link type ="text/css" href="{% static 'places/css/style.css' %}" rel="stylesheet">
 {% block content %}
 {% if user.is_authenticated %}
@@ -17,14 +18,27 @@
 </aside>
 <div id="content" >
     <h1>Ваши воспоминания</h1>
-        <form action="/accounts/profile/" method="post">
+
+    {% get_memories filter=user.socialaccount_set.all.0.id as memory%}
+
+    {% if memory != None %}
+    <ul>
+    {% for m in memory %}
+    <li>
+        {{m.name}},
+        {{m.comment}}
+    </li>
+    </ul>
+    {% endfor %}
+    {% else %}
+    <h3>У вас нет ни одного воспоминания</h3>
+    {% endif %}
+
+        <form action="{% url 'profile' %}" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <!--<div class="form-row">
-                <input type="text" id="name" name="student_name"></div>
-            <div class="form-row">
-                <input type="text" id="comment" name="student_name"></div>-->
 
+            <div id="map"><script src="{% static 'places/js/map.js' %}"></script></div>
             <button class="btn btn-primary" type="submit" value=Submit">добавить</button>
         </form>
 </div>
