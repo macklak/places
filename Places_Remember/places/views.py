@@ -12,7 +12,7 @@ def index(request):
 def addmarker(request):
     if request.method == 'POST':
         form = MyGeoForm(request.POST)
-        #form.useruid = request
+
         if form.is_valid():
 
             try:
