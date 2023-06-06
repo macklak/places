@@ -12,8 +12,9 @@ class MyGeoForm(forms.ModelForm):
 #    form.instance.user = self.request.user
     class Meta:
         model=memories
-        fields = ["name","comment",'mapPlace']
+        fields = ["name","comment",'mapPlace','useruid']
         mapPlace=forms.PolygonField()
         widgets = {
             "mapPlace": forms.OSMWidget(attrs={'map_width': 800, 'map_height': 500}),
+            "useruid":forms.HiddenInput()
         }

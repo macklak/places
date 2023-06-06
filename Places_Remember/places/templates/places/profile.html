@@ -37,7 +37,7 @@
         <form action="{% url 'profile' %}" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-
+            <input type='hidden' name="useruid" value="{{ user.socialaccount_set.all.0.id }}" />
             <div id="map"><script src="{% static 'places/js/map.js' %}"></script></div>
             <button class="btn btn-primary" type="submit" value=Submit">добавить</button>
         </form>
